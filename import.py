@@ -1,16 +1,17 @@
-import json
+import pandas as pd
 
-# Load the JSON data from a file
-with open("data.json", "r") as json_file:
-    data = json.load(json_file)
+# Replace 'your_excel_file.xlsx' with the actual path to your Excel file
+excel_file = 'your_excel_file.xlsx'
 
-# Define the criteria for deletion (e.g., "Age" equals 30)
-criteria = "Age"
-value_to_delete = 30
+# Load Excel data into a pandas DataFrame
+df = pd.read_excel(excel_file, engine='openpyxl')
 
-# Iterate through the JSON array and remove matching objects
-data = [item for item in data if item.get(criteria) != value_to_delete]
+# Convert DataFrame to JSON
+json_data = df.to_json(orient='records')
 
-# Save the modified data back to the JSON file
-with open("data.json", "w") as json_file:
-    json.dump(data, json_file, indent=4)
+# Print or save the JSON data
+print(json_data)
+
+# If you want to save the JSON data to a file, you can do this:
+# with open('output.json', 'w') as json_file:
+#     json_file.write(json_data)
