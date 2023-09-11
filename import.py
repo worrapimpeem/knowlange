@@ -1,15 +1,24 @@
-import pandas as pd
+import json
 
-# Specify the path to the JSON file
-json_file_path = "data.json"
+# Define the input and output file names
+input_file_name = 'k.json'
+output_file_name = 'output.json'
 
-# Read the JSON data into a pandas DataFrame
-df = pd.read_json(json_file_path)
+# Read data from the input JSON file
+with open(input_file_name, 'r') as input_file:
+    input_data = json.load(input_file)
 
-# Specify the Excel file path where you want to save the data
-excel_file_path = "data.xlsx"
+# Flatten the JSON structure
+output_data = {
+    "name": input_data["name"],
+    "age": input_data["age"],
+    "street": input_data["address"]["street"],
+    "city": input_data["address"]["city"],
+    "state": input_data["address"]["state"]
+}
 
-# Convert the DataFrame to an Excel file
-df.to_excel(excel_file_path, index=False)
+# Write the flattened data to the output JSON file
+with open(output_file_name, 'w') as output_file:
+    json.dump(output_data, output_file, indent=4)
 
-print(f"Data from {json_file_path} has been saved to {excel_file_path} in Excel format.")
+print(f'Flattened data saved to "{output_file_name}"')
