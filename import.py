@@ -1,19 +1,15 @@
 import pandas as pd
 
-# Replace 'your_excel_file.xlsx' with the actual path to your Excel file
-excel_file = 'your_excel_file.xlsx'
+# Specify the path to the JSON file
+json_file_path = "data.json"
 
-# Load Excel data into a pandas DataFrame
-df = pd.read_excel(excel_file, engine='openpyxl')
+# Read the JSON data into a pandas DataFrame
+df = pd.read_json(json_file_path)
 
-# Convert DataFrame to JSON
-json_data = df.to_json(orient='records')
+# Specify the Excel file path where you want to save the data
+excel_file_path = "data.xlsx"
 
-# Specify the output JSON file name
-json_file_name = 'output.json'
+# Convert the DataFrame to an Excel file
+df.to_excel(excel_file_path, index=False)
 
-# Save the JSON data to a file
-with open(json_file_name, 'w') as json_file:
-    json_file.write(json_data)
-
-print(f"Data has been saved to {json_file_name}")
+print(f"Data from {json_file_path} has been saved to {excel_file_path} in Excel format.")
