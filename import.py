@@ -9,9 +9,11 @@ df = pd.read_excel(excel_file, engine='openpyxl')
 # Convert DataFrame to JSON
 json_data = df.to_json(orient='records')
 
-# Print or save the JSON data
-print(json_data)
+# Specify the output JSON file name
+json_file_name = 'output.json'
 
-# If you want to save the JSON data to a file, you can do this:
-# with open('output.json', 'w') as json_file:
-#     json_file.write(json_data)
+# Save the JSON data to a file
+with open(json_file_name, 'w') as json_file:
+    json_file.write(json_data)
+
+print(f"Data has been saved to {json_file_name}")
