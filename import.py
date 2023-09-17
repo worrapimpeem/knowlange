@@ -1,17 +1,19 @@
 import json
 
-# Original JSON data
-data = {
-    'name': "'dick'John'put'",
-    'age': 30,
-    'address': {
-        'street': '123 Main St',
-        'city': 'New York'
-    }
+# Sample output data (Python dictionary)
+output_data = {
+    "name": "Alice",
+    "age": 25,
+    "city": "San Francisco"
 }
 
-# Serialize the data to a properly formatted JSON string
-formatted_json = json.dumps(data, indent=4)
+# Specify the file path where you want to save the JSON data
+file_path = "output.json"
 
-# Print the formatted JSON
-print(formatted_json)
+# Write the output data to the JSON file
+try:
+    with open(file_path, "w") as file:
+        json.dump(output_data, file, indent=4)
+    print(f"Data has been written to '{file_path}' successfully.")
+except Exception as e:
+    print(f"An error occurred: {e}")
