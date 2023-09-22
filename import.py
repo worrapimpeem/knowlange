@@ -1,19 +1,18 @@
-import json
+from azure.identity import ClientSecretCredential
+from azure.keyvault.secrets import SecretClient
+from dotenv import load_dotenv
+import os
 
-# Sample output data (Python dictionary)
-output_data = {
-    "name": "Alice",
-    "age": 25,
-    "city": "San Francisco"
-}
+load_dotenv()
 
-# Specify the file path where you want to save the JSON data
-file_path = "output.json"
+client_id = os.environ['AZURE_CLIENT_ID']
+tenant_id = os.environ['AZURE_TENANT_ID']
+client_secret = os.environ['AZURE_CLIENT_SECRET']
+vault_url = os.environ["AZURE_VAULT_URL"]
+secret_name = "ExamplePassword"
+# create a credential
 
-# Write the output data to the JSON file
-try:
-    with open(file_path, "w") as file:
-        json.dump(output_data, file, indent=4)
-    print(f"Data has been written to '{file_path}' successfully.")
-except Exception as e:
-    print(f"An error occurred: {e}")
+credentials = ClientSecretCredential(
+    client_id = client_id,
+    client_secret = client_secret,
+    tenant_id = tenant_id
